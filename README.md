@@ -33,7 +33,7 @@ The URL to be used for testing different project functionalities are as follows 
 3. To Get Details of all the vehicles - “http://localhost:8080/vehicleDetail/getAll”
 4. To Get ALL HIGH alerts in last two hours - 
 		“http://localhost:8080/vehicleReading/getAllHighAlerts”
-5. To Get All alerts for a given vehicle - “http://localhost:8080/vehicleReading/getAllAlerts/<vehicle_id>”
+5. To Get All alerts for a given vehicle - “http://localhost:8080/vehicleReading/getAllAlerts/<vin>”
 
  
 
