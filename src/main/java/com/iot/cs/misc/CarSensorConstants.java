@@ -4,6 +4,8 @@ package com.iot.cs.misc;
 /**
  *
  * @author sanjaybadlani
+ * Here we store the contant values that are being used across the projecs and 
+ * be displayed in form of a certain message to the client
  */
 public class CarSensorConstants {
     public static String ALERT_MESSAGE_ENGINE_RPM = " The Engine RPM of this vehicle has become greater than redline rpm !!!";

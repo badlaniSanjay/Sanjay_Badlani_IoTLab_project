@@ -1,4 +1,3 @@
-
 package com.iot.cs.service;
 
 import com.iot.cs.DAO.VehicleDetailDAO;
@@ -12,38 +11,37 @@ import org.springframework.stereotype.Service;
 
 /**
  *
- * @author sanjaybadlani
+ * @author sanjaybadlani This is service class used to access the DAO class to
+ * process Vehicle Detail Requests
  */
 @Service
 public class VehicleDetailService {
-    
+
     private static VehicleDetailService instance = null;
-    
+
     private VehicleDetailDAO vehicleDetailDAO;
-    
-    private VehicleDetailService (){
+
+    private VehicleDetailService() {
         vehicleDetailDAO = VehicleDetailDAO.instance();
     }
-    
-    public static VehicleDetailService instance(){
-        if(instance == null ){
+
+    public static VehicleDetailService instance() {
+        if (instance == null) {
             instance = new VehicleDetailService();
         }
-        return instance ;
+        return instance;
     }
-    
-    public void save(VehicleDetail vehicleDetail){
+
+    public void save(VehicleDetail vehicleDetail) {
         vehicleDetailDAO.save(vehicleDetail);
     }
-    
-    public VehicleDetail findVehicleDetailByVin (String vin){
+
+    public VehicleDetail findVehicleDetailByVin(String vin) {
         return vehicleDetailDAO.findVehicleDetailByVin(vin);
     }
-    
-    public List<VehicleDetail> findAllVehicleDetail(){
+
+    public List<VehicleDetail> findAllVehicleDetail() {
         return vehicleDetailDAO.findAllVehicleDetails();
     }
-    
 
-   
 }

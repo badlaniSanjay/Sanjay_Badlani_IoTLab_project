@@ -1,4 +1,3 @@
-
 package com.iot.cs.model;
 
 import com.iot.cs.misc.AlertPriority;
@@ -7,36 +6,35 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Objects;
 
-
 /**
  *
  * @author sanjaybadlani
  */
 @Entity
-@Table(name= "vehicle_alert")
-public class VehicleAlert implements Serializable{
-    
+@Table(name = "vehicle_alert")
+public class VehicleAlert implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
-    
+
     @Column(name = "vin")
     private String vin;
 
     @Column(name = "alert_message")
-    private String  alertMessage;
+    private String alertMessage;
 
     @Column(name = "alert_priority")
     private AlertPriority alertPriority;
-    
+
     @Column(name = "current_timestamp_ts")
     private Timestamp currentTimestampTs;
 
-    public VehicleAlert(String vin, String alertMessage, 
-            AlertPriority alertPriority, 
+    public VehicleAlert(String vin, String alertMessage,
+            AlertPriority alertPriority,
             Timestamp currentTimestampTs) {
-        
+
         this.vin = vin;
         this.alertMessage = alertMessage;
         this.alertPriority = alertPriority;
@@ -45,9 +43,6 @@ public class VehicleAlert implements Serializable{
 
     public VehicleAlert() {
     }
-    
-
-    
 
     public Integer getId() {
         return id;
@@ -91,9 +86,9 @@ public class VehicleAlert implements Serializable{
 
     @Override
     public String toString() {
-        return "Alert{" + "id=" + id + ", vin=" + vin + ", alertMessage=" + alertMessage 
-                + ", alertPriority=" 
-                + alertPriority 
+        return "Alert{" + "id=" + id + ", vin=" + vin + ", alertMessage=" + alertMessage
+                + ", alertPriority="
+                + alertPriority
                 + ", currentTimestampTs=" + currentTimestampTs + '}';
     }
 
@@ -137,12 +132,5 @@ public class VehicleAlert implements Serializable{
         }
         return true;
     }
-    
-    
 
-    
-    
-    
 }
-
-

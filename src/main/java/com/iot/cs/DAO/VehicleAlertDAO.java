@@ -1,4 +1,3 @@
-
 package com.iot.cs.DAO;
 
 import com.iot.cs.misc.AlertPriority;
@@ -15,16 +14,17 @@ import org.hibernate.resource.transaction.spi.TransactionStatus;
 
 /**
  *
- * @author sanjaybadlani
+ * @author sanjaybadlani This class is used to do CRUD operations on
+ * VehicleAlert Model
  */
 public class VehicleAlertDAO {
+
     private static VehicleAlertDAO instance = null;
-    private static String GET_ALERTS_BY_VIN = "FROM VehicleAlert WHERE vin = :vin" ;
+    private static String GET_ALERTS_BY_VIN = "FROM VehicleAlert WHERE vin = :vin";
     private static String GET_ALERTS_BY_TIMESTAMP_AND_PRIORITY = "FROM VehicleAlert va where va.currentTimestampTs > "
             + " :givenTimestamp AND va.alertPriority = :givenPriority";
     HibernateUtil hibernateUtil;
     SessionFactory factory;
-    
 
     private VehicleAlertDAO() {
         hibernateUtil = new HibernateUtil();
@@ -51,12 +51,11 @@ public class VehicleAlertDAO {
     }
 
     public List<VehicleAlert> findVehicleAlertsByVin(String vin) {
-        ArrayList<VehicleAlert> vehicleAlertList =new ArrayList<>();
+        ArrayList<VehicleAlert> vehicleAlertList = new ArrayList<>();
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
-        
-      
-        Query query = session.createQuery(GET_ALERTS_BY_VIN);     
+
+        Query query = session.createQuery(GET_ALERTS_BY_VIN);
         query.setParameter("vin", vin);
         List temp = query.list();
         vehicleAlertList.addAll(temp);
@@ -69,13 +68,12 @@ public class VehicleAlertDAO {
     }
 
     public List<VehicleAlert> findAlertsWithTimeGreaterAndPriority(Timestamp twoHoursBack, AlertPriority alertPriority) {
-        
-        
+
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
-        
+
         Query query = session.createQuery(GET_ALERTS_BY_TIMESTAMP_AND_PRIORITY);
-        query.setParameter("givenTimestamp",twoHoursBack);
+        query.setParameter("givenTimestamp", twoHoursBack);
         query.setParameter("givenPriority", alertPriority);
         List results = query.list();
         if (tx.getStatus().equals(TransactionStatus.ACTIVE)) {

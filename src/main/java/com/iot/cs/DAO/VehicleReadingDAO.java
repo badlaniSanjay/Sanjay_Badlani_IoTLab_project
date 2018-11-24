@@ -1,4 +1,3 @@
-
 package com.iot.cs.DAO;
 
 import com.iot.cs.misc.HibernateUtil;
@@ -10,10 +9,12 @@ import org.hibernate.resource.transaction.spi.TransactionStatus;
 
 /**
  *
- * @author sanjaybadlani
+ * @author sanjaybadlani This class is used to implement CRUD operations on
+ * Vehicle Reading model.
  */
 public class VehicleReadingDAO {
-      private static VehicleReadingDAO instance = null;
+
+    private static VehicleReadingDAO instance = null;
     HibernateUtil hibernateUtil;
     SessionFactory factory;
 

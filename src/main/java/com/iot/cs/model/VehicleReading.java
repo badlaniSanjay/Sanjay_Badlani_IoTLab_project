@@ -1,4 +1,3 @@
-
 package com.iot.cs.model;
 
 import javax.persistence.*;
@@ -12,13 +11,13 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "vehicle_reading")
-public class VehicleReading implements Serializable{
-    
+public class VehicleReading implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
-    
+
     @Column(name = "vin")
     private String vin;
 
@@ -36,19 +35,19 @@ public class VehicleReading implements Serializable{
 
     @Column(name = "speed")
     private Integer speed;
-    
+
     @Column(name = "engine_hp")
     private Integer engineHp;
-    
+
     @Column(name = "check_engine_light_on")
     private Boolean checkEngineLightOn;
-    
+
     @Column(name = "engine_coolant_low")
     private Boolean engineCoolantLow;
-    
+
     @Column(name = "cruise_control_on")
     private Boolean cruiseControlOn;
-    
+
     @Column(name = "engine_rpm")
     private Integer engineRpm;
 
@@ -69,10 +68,6 @@ public class VehicleReading implements Serializable{
 
     public VehicleReading() {
     }
-    
-    
-
-    
 
     public Integer getId() {
         return id;
@@ -89,8 +84,6 @@ public class VehicleReading implements Serializable{
     public void setVin(String vin) {
         this.vin = vin;
     }
-    
-    
 
     public Double getLatitude() {
         return latitude;
@@ -177,10 +170,4 @@ public class VehicleReading implements Serializable{
         return "VehicleReading{" + "id=" + id + ", vin=" + vin + ", latitude=" + latitude + ", longitude=" + longitude + ", currentTimestampTs=" + currentTimestampTs + ", fuelVolume=" + fuelVolume + ", speed=" + speed + ", engineHp=" + engineHp + ", checkEngineLightOn=" + checkEngineLightOn + ", engineCoolantLow=" + engineCoolantLow + ", cruiseControlOn=" + cruiseControlOn + ", engineRpm=" + engineRpm + '}';
     }
 
-    
-   
-
-    
-    
-    
 }

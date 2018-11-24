@@ -1,4 +1,3 @@
-
 package com.iot.cs.model;
 
 import javax.persistence.*;
@@ -11,9 +10,9 @@ import java.util.Objects;
  * @author sanjaybadlani
  */
 @Entity
-@Table(name= "vehicle_detail")  
-public class VehicleDetail implements Serializable{
-    
+@Table(name = "vehicle_detail")
+public class VehicleDetail implements Serializable {
+
     @Id
     @Column(name = "vin")
     private String vin;
@@ -29,11 +28,10 @@ public class VehicleDetail implements Serializable{
 
     @Column(name = "redline_rpm")
     private Integer redlineRpm;
-    
+
     @Column(name = "max_fuel_volume")
     private Integer maxFuelVolume;
 
-    
     @Column(name = "last_service_date")
     private Timestamp lastServiceDate;
 
@@ -50,7 +48,6 @@ public class VehicleDetail implements Serializable{
         this.lastServiceDate = lastServiceDate;
     }
 
-      
     public String getVin() {
         return vin;
     }
@@ -109,13 +106,13 @@ public class VehicleDetail implements Serializable{
 
     @Override
     public String toString() {
-        return "VehicleDetails{" +"vin=" + vin + ", make=" + make + ", model=" + model + ", year=" + year + ", redlineRpm=" + redlineRpm + ", maxFuelVolume=" + maxFuelVolume + ", lastServiceDate=" + lastServiceDate + '}';
+        return "VehicleDetails{" + "vin=" + vin + ", make=" + make + ", model=" + model + ", year=" + year + ", redlineRpm=" + redlineRpm + ", maxFuelVolume=" + maxFuelVolume + ", lastServiceDate=" + lastServiceDate + '}';
     }
 
     @Override
     public int hashCode() {
         int hash = 3;
-       
+
         hash = 83 * hash + Objects.hashCode(this.vin);
         hash = 83 * hash + Objects.hashCode(this.make);
         hash = 83 * hash + Objects.hashCode(this.model);
@@ -147,7 +144,7 @@ public class VehicleDetail implements Serializable{
         if (!Objects.equals(this.model, other.model)) {
             return false;
         }
-       
+
         if (!Objects.equals(this.year, other.year)) {
             return false;
         }
@@ -162,9 +159,5 @@ public class VehicleDetail implements Serializable{
         }
         return true;
     }
-    
-    
-    
-    
-   
+
 }

@@ -14,6 +14,7 @@ import org.hibernate.service.ServiceRegistry;
 /**
  *
  * @author sanjaybadlani
+ * This class is used to create the session factory objects and supply that to the DAO layer.
  */
 public class HibernateUtil {
  
@@ -27,15 +28,6 @@ public class HibernateUtil {
             SessionFactory factory = meta.getSessionFactoryBuilder().build();  
             return factory ;
             
-            
-            
-            // Create the SessionFactory from hibernate.cfg.xml
-//            Configuration configuration = new Configuration();
-//            configuration.configure("hibernate.cfg.xml");
-//            ServiceRegistry serviceRegistry = new ServiceRegistryBuilder()
-//                    .applySettings(configuration.getProperties())
-//                    .buildServiceRegistry();
-//            return configuration.buildSessionFactory(serviceRegistry);
             
         } catch (Throwable ex) {
             System.err.println("Initial SessionFactory creation failed." + ex);

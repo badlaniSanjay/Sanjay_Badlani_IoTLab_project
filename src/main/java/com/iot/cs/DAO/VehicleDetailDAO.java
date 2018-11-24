@@ -10,7 +10,8 @@ import org.hibernate.resource.transaction.spi.TransactionStatus;
 
 /**
  *
- * @author sanjaybadlani
+ * @author sanjaybadlani This class is used to implement CRUD operations on
+ * VehicleDetail model.
  */
 public class VehicleDetailDAO {
 
@@ -55,8 +56,8 @@ public class VehicleDetailDAO {
 
         return temp;
     }
-    
-    public List<VehicleDetail> findAllVehicleDetails(){
+
+    public List<VehicleDetail> findAllVehicleDetails() {
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
         List temp = session.createQuery(FIND_ALL).list();

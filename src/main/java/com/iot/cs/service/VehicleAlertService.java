@@ -1,4 +1,3 @@
-
 package com.iot.cs.service;
 
 //import com.iot.cs.repo.VehicleAlertRepository;
@@ -11,30 +10,32 @@ import org.springframework.stereotype.Service;
 
 /**
  *
- * @author sanjaybadlani
+ * @author sanjaybadlani This is service class used to access the DAO class to
+ * process Vehicle Alert Requests
  */
 @Service
 public class VehicleAlertService {
-private static VehicleAlertService instance = null;
-    
+
+    private static VehicleAlertService instance = null;
+
     private VehicleAlertDAO vehicleAlertDAO;
-    
-    private VehicleAlertService (){
+
+    private VehicleAlertService() {
         vehicleAlertDAO = VehicleAlertDAO.instance();
     }
-    
-    public static VehicleAlertService instance(){
-        if(instance == null ){
+
+    public static VehicleAlertService instance() {
+        if (instance == null) {
             instance = new VehicleAlertService();
         }
-        return instance ;
+        return instance;
     }
-    
-    public void save(VehicleAlert VehicleAlert){
+
+    public void save(VehicleAlert VehicleAlert) {
         vehicleAlertDAO.save(VehicleAlert);
     }
-    
-    public List<VehicleAlert> findVehicleAlertByVin (String vin){
+
+    public List<VehicleAlert> findVehicleAlertByVin(String vin) {
         return vehicleAlertDAO.findVehicleAlertsByVin(vin);
     }
 
@@ -42,9 +43,4 @@ private static VehicleAlertService instance = null;
         return vehicleAlertDAO.findAlertsWithTimeGreaterAndPriority(twoHoursBack, alertPriority);
     }
 
-   
-    
-
-   
-    
 }
