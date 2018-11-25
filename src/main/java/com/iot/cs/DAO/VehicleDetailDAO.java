@@ -7,30 +7,34 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.resource.transaction.spi.TransactionStatus;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author sanjaybadlani This class is used to implement CRUD operations on
  * VehicleDetail model.
  */
+@Repository
+@Scope( BeanDefinition.SCOPE_SINGLETON )
 public class VehicleDetailDAO {
 
-    private static VehicleDetailDAO instance = null;
+   
     private static String FIND_ALL = "FROM VehicleDetail";
+    
+    @Autowired
     HibernateUtil hibernateUtil;
+    
     SessionFactory factory;
 
-    private VehicleDetailDAO() {
-        hibernateUtil = new HibernateUtil();
+    public VehicleDetailDAO() {
+        
         factory = hibernateUtil.getSessionFactory();
     }
 
-    public static VehicleDetailDAO instance() {
-        if (instance == null) {
-            instance = new VehicleDetailDAO();
-        }
-        return instance;
-    }
+    
 
     public void save(VehicleDetail vehicleDetail) {
         Session session = factory.openSession();

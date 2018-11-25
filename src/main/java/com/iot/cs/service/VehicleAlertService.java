@@ -6,6 +6,9 @@ import com.iot.cs.misc.AlertPriority;
 import com.iot.cs.model.VehicleAlert;
 import java.sql.Timestamp;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,21 +17,18 @@ import org.springframework.stereotype.Service;
  * process Vehicle Alert Requests
  */
 @Service
+@Scope(BeanDefinition.SCOPE_SINGLETON)
 public class VehicleAlertService {
-
-    private static VehicleAlertService instance = null;
 
     private VehicleAlertDAO vehicleAlertDAO;
 
     private VehicleAlertService() {
-        vehicleAlertDAO = VehicleAlertDAO.instance();
+
     }
 
-    public static VehicleAlertService instance() {
-        if (instance == null) {
-            instance = new VehicleAlertService();
-        }
-        return instance;
+    @Autowired
+    public void setVehicleAlertDAO(VehicleAlertDAO vehicleAlertDAO) {
+        this.vehicleAlertDAO = vehicleAlertDAO;
     }
 
     public void save(VehicleAlert VehicleAlert) {

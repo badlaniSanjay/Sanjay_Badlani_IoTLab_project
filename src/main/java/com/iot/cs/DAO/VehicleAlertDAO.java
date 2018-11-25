@@ -11,32 +11,36 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.hibernate.resource.transaction.spi.TransactionStatus;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author sanjaybadlani This class is used to do CRUD operations on
  * VehicleAlert Model
  */
+@Repository
+@Scope( BeanDefinition.SCOPE_SINGLETON )
 public class VehicleAlertDAO {
 
-    private static VehicleAlertDAO instance = null;
+   
     private static String GET_ALERTS_BY_VIN = "FROM VehicleAlert WHERE vin = :vin";
     private static String GET_ALERTS_BY_TIMESTAMP_AND_PRIORITY = "FROM VehicleAlert va where va.currentTimestampTs > "
             + " :givenTimestamp AND va.alertPriority = :givenPriority";
+    
+    @Autowired
     HibernateUtil hibernateUtil;
+    
     SessionFactory factory;
 
-    private VehicleAlertDAO() {
-        hibernateUtil = new HibernateUtil();
+    public VehicleAlertDAO() {
+        
         factory = hibernateUtil.getSessionFactory();
     }
 
-    public static VehicleAlertDAO instance() {
-        if (instance == null) {
-            instance = new VehicleAlertDAO();
-        }
-        return instance;
-    }
+
 
     public void save(VehicleAlert vehicleAlert) {
         Session session = factory.openSession();

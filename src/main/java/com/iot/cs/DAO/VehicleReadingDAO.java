@@ -6,30 +6,31 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.resource.transaction.spi.TransactionStatus;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author sanjaybadlani This class is used to implement CRUD operations on
  * Vehicle Reading model.
  */
+@Repository
+@Scope( BeanDefinition.SCOPE_SINGLETON )
 public class VehicleReadingDAO {
 
-    private static VehicleReadingDAO instance = null;
+    @Autowired
     HibernateUtil hibernateUtil;
+    
     SessionFactory factory;
 
-    private VehicleReadingDAO() {
-        hibernateUtil = new HibernateUtil();
+    public VehicleReadingDAO() {
+        
         factory = hibernateUtil.getSessionFactory();
     }
 
-    public static VehicleReadingDAO instance() {
-        if (instance == null) {
-            instance = new VehicleReadingDAO();
-        }
-        return instance;
-    }
-
+    
     public void save(VehicleReading VehicleReading) {
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();

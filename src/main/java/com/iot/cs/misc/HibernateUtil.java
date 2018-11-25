@@ -8,6 +8,9 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 
 
@@ -16,6 +19,8 @@ import org.hibernate.service.ServiceRegistry;
  * @author sanjaybadlani
  * This class is used to create the session factory objects and supply that to the DAO layer.
  */
+@Component
+@Scope( BeanDefinition.SCOPE_SINGLETON )
 public class HibernateUtil {
  
     private static final SessionFactory sessionFactory = buildSessionFactory();

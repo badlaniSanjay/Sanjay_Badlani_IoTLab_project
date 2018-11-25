@@ -7,6 +7,8 @@ import java.util.List;
 import org.hibernate.SessionFactory;
 //import com.iot.cs.repo.VehicleDetailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,21 +17,18 @@ import org.springframework.stereotype.Service;
  * process Vehicle Detail Requests
  */
 @Service
+@Scope(BeanDefinition.SCOPE_SINGLETON)
 public class VehicleDetailService {
-
-    private static VehicleDetailService instance = null;
 
     private VehicleDetailDAO vehicleDetailDAO;
 
     private VehicleDetailService() {
-        vehicleDetailDAO = VehicleDetailDAO.instance();
+
     }
 
-    public static VehicleDetailService instance() {
-        if (instance == null) {
-            instance = new VehicleDetailService();
-        }
-        return instance;
+    @Autowired
+    public void setVehicleDetailDAO(VehicleDetailDAO vehicleDetailDAO) {
+        this.vehicleDetailDAO = vehicleDetailDAO;
     }
 
     public void save(VehicleDetail vehicleDetail) {

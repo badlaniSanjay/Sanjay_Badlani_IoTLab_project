@@ -39,12 +39,12 @@ public class VehicleDetailController {
         for (VehicleDetail eachVehicleDetail : vehicleDetails) {
             try {
                 if (vehicleDetailService.findVehicleDetailByVin(eachVehicleDetail.getVin()) != null) {
-                    log.debug("There is no entry in the database with vehice Id vin as " + (eachVehicleDetail.getVin()));
-                    log.debug("Saving a new Object " + eachVehicleDetail.toString());
+                    log.debug("There is  entry in the database with vehice Id vin as " + (eachVehicleDetail.getVin()));
+                    log.debug("Updating the existing Object " + eachVehicleDetail.toString());
                     vehicleDetailService.save(eachVehicleDetail);
                 } else {
-                    log.debug("There exits an entry in the database with vehice Id vin as " + (eachVehicleDetail.getVin()));
-                    log.debug("Updating the existing Object " + eachVehicleDetail.toString());
+                    log.debug("There is no entry in the database with vehice Id vin as " + (eachVehicleDetail.getVin()));
+                    log.debug("saving Object " + eachVehicleDetail.toString());
                     vehicleDetailService.save(eachVehicleDetail);
                 }
             } catch (Exception ex) {
