@@ -2,6 +2,7 @@ package com.iot.cs.web;
 
 import com.iot.cs.model.VehicleDetail;
 import com.iot.cs.service.VehicleDetailService;
+import com.iot.cs.service.VehicleDetailServiceImpl;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -6,8 +6,11 @@ import com.iot.cs.model.VehicleAlert;
 import com.iot.cs.model.VehicleDetail;
 import com.iot.cs.model.VehicleReading;
 import com.iot.cs.service.VehicleAlertService;
+import com.iot.cs.service.VehicleAlertServiceImpl;
 import com.iot.cs.service.VehicleDetailService;
+import com.iot.cs.service.VehicleDetailServiceImpl;
 import com.iot.cs.service.VehicleReadingService;
+import com.iot.cs.service.VehicleReadingServiceImpl;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -38,7 +41,7 @@ public class VehicleReadingController {
     private VehicleAlertService vehicleAlertService;
     
     @Autowired
-    public VehicleReadingController(VehicleReadingService vehicleReadingService, VehicleDetailService vehicleDetailService, VehicleAlertService vehicleAlertService) {
+    public VehicleReadingController(VehicleReadingServiceImpl vehicleReadingService, VehicleDetailServiceImpl vehicleDetailService, VehicleAlertServiceImpl vehicleAlertService) {
         this.vehicleReadingService = vehicleReadingService;
         this.vehicleDetailService = vehicleDetailService;
         this.vehicleAlertService = vehicleAlertService;
