@@ -11,7 +11,8 @@ import com.iot.cs.service.VehicleReadingService;
 
 import java.sql.Timestamp;
 import java.util.List;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,7 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = "/vehicleReading/")
 public class VehicleReadingController {
     
-    private static Logger log = Logger.getLogger(VehicleReadingController.class.getName());
+    private static final org.slf4j.Logger log = LoggerFactory.getLogger(VehicleReadingController.class);
     
     private VehicleReadingService vehicleReadingService;
     private VehicleDetailService vehicleDetailService;
@@ -46,12 +47,12 @@ public class VehicleReadingController {
     @ResponseStatus(HttpStatus.CREATED)
     public void createVehicleReading(@RequestBody VehicleReading vehicleReading) {
         try {
-            log.info("Processing the " + vehicleReading.toString() + " to check if any alert needs to be generated ");
+            log.debug("Processing the " + vehicleReading.toString() + " to check if any alert needs to be generated ");
             checkIfAnyAlertNeedsToBeGenerated(vehicleReading);
-            log.info("Saving the " + vehicleReading.toString() + " to the database");
+            log.debug("Saving the " + vehicleReading.toString() + " to the database");
             vehicleReadingService.save(vehicleReading);            
         } catch (Exception ex) {
-            log.severe("Exception while processing the create Vehicle Reading request " + ex);
+            log.error("Exception while processing the create Vehicle Reading request " + ex);
         }
         
     }
@@ -62,11 +63,11 @@ public class VehicleReadingController {
         try {
             
             Timestamp twoHoursBack = new Timestamp(System.currentTimeMillis() - 7200000);
-            log.info("Time two hours ago was " + twoHoursBack);
-            log.info("Fetching all High Alerts since" + twoHoursBack);
+            log.debug("Time two hours ago was " + twoHoursBack);
+            log.debug("Fetching all High Alerts since" + twoHoursBack);
             return vehicleAlertService.findAlertsWithTimeGreaterAndPriority(twoHoursBack, AlertPriority.HIGH);
         } catch (Exception ex) {
-            log.severe("Exception occured while fetching all high alerts " + ex);
+            log.error("Exception occured while fetching all high alerts " + ex);
         }
         return null;
     }
@@ -75,10 +76,10 @@ public class VehicleReadingController {
     @RequestMapping(method = RequestMethod.GET, path = "/getAllAlerts/{vin}")
     public List<VehicleAlert> getAllAlertsForVehicle(@PathVariable(value = "vin") String vin) {
         try {
-            log.info("Fetching alerts for vehicle " + vin);
+            log.debug("Fetching alerts for vehicle " + vin);
             return vehicleAlertService.findVehicleAlertByVin(vin);
         } catch (Exception ex) {
-            log.severe("Exception while Fetching alerts for vehicle with vin " + vin);
+            log.error("Exception while Fetching alerts for vehicle with vin " + vin);
         }
         return null;
     }
@@ -87,12 +88,12 @@ public class VehicleReadingController {
     private void checkIfAnyAlertNeedsToBeGenerated(VehicleReading vehicleReading) {
         VehicleDetail currentVehicleDetail = vehicleDetailService.findVehicleDetailByVin(vehicleReading.getVin());
         if (vehicleReading.getEngineRpm() > currentVehicleDetail.getredlineRpm()) {
-            log.info("Engine RPM found Greater tthan Threshold , Generating Alert for vehicle " + vehicleReading.getVin());
+            log.debug("Engine RPM found Greater tthan Threshold , Generating Alert for vehicle " + vehicleReading.getVin());
             createAlert(vehicleReading.getVin(), CarSensorConstants.ALERT_MESSAGE_ENGINE_RPM, AlertPriority.HIGH);
         }
         
         if (currentVehicleDetail.getMaxFuelVolume() > vehicleReading.getFuelVolume() * 10) {
-            log.info("Fuel Volume found below tthan Threshold , Generating Alert for vehicle " + vehicleReading.getVin());
+            log.debug("Fuel Volume found below tthan Threshold , Generating Alert for vehicle " + vehicleReading.getVin());
             createAlert(vehicleReading.getVin(), CarSensorConstants.ALERT_MESSAGE_FUEL_VOLUME, AlertPriority.MEDIUM);
         }
     }
@@ -101,10 +102,10 @@ public class VehicleReadingController {
         try {
             
             VehicleAlert alert = new VehicleAlert(vin, alertMessage, alertPriority, new Timestamp(System.currentTimeMillis()));
-            log.info("Saving the Alert" + alert + " to the database");
+            log.debug("Saving the Alert" + alert + " to the database");
             vehicleAlertService.save(alert);
         } catch (Exception ex) {
-            log.severe("Error in creating Alert for vehicle with vin " + vin);
+            log.error("Error in creating Alert for vehicle with vin " + vin);
         }
     }
     

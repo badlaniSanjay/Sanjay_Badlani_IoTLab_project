@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  *
@@ -34,6 +35,10 @@ public class VehicleDetail implements Serializable {
 
     @Column(name = "last_service_date")
     private Timestamp lastServiceDate;
+    
+    
+
+    
 
     public VehicleDetail() {
     }
