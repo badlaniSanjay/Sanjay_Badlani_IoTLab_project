@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `CAR_SENSOR` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */;
-USE `CAR_SENSOR`;
 -- MySQL dump 10.13  Distrib 8.0.13, for macos10.14 (x86_64)
 --
 -- Host: localhost    Database: CAR_SENSOR
@@ -18,6 +16,23 @@ USE `CAR_SENSOR`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `tires`
+--
+
+DROP TABLE IF EXISTS `tires`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `tires` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `front_left` int(11) DEFAULT NULL,
+  `front_right` int(11) DEFAULT NULL,
+  `rear_left` int(11) DEFAULT NULL,
+  `rear_right` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `vehicle_alert`
 --
 
@@ -30,18 +45,10 @@ CREATE TABLE `vehicle_alert` (
   `alert_message` longtext NOT NULL,
   `alert_priority` varchar(45) NOT NULL,
   `current_timestamp_ts` timestamp NOT NULL,
+  `vehicle_detail_id` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `vehicle_alert`
---
-
-LOCK TABLES `vehicle_alert` WRITE;
-/*!40000 ALTER TABLE `vehicle_alert` DISABLE KEYS */;
-/*!40000 ALTER TABLE `vehicle_alert` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `vehicle_detail`
@@ -63,15 +70,6 @@ CREATE TABLE `vehicle_detail` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `vehicle_detail`
---
-
-LOCK TABLES `vehicle_detail` WRITE;
-/*!40000 ALTER TABLE `vehicle_detail` DISABLE KEYS */;
-/*!40000 ALTER TABLE `vehicle_detail` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `vehicle_reading`
 --
 
@@ -91,18 +89,12 @@ CREATE TABLE `vehicle_reading` (
   `ENgine_coolant_low` tinyint(1) DEFAULT NULL,
   `Cruise_control_on` tinyint(1) DEFAULT NULL,
   `ENgine_rpm` int(11) DEFAULT NULL,
-  PRIMARY KEY (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `tires_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`Id`),
+  KEY `fk_tire_idx` (`tires_id`),
+  CONSTRAINT `fk_tire` FOREIGN KEY (`tires_id`) REFERENCES `tires` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `vehicle_reading`
---
-
-LOCK TABLES `vehicle_reading` WRITE;
-/*!40000 ALTER TABLE `vehicle_reading` DISABLE KEYS */;
-/*!40000 ALTER TABLE `vehicle_reading` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -113,4 +105,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-23 22:45:16
+-- Dump completed on 2018-11-25  2:17:53
