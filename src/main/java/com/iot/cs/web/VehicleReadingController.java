@@ -5,6 +5,7 @@ import com.iot.cs.misc.CarSensorConstants;
 import com.iot.cs.model.VehicleAlert;
 import com.iot.cs.model.VehicleDetail;
 import com.iot.cs.model.VehicleReading;
+import com.iot.cs.service.TiresService;
 import com.iot.cs.service.VehicleAlertService;
 import com.iot.cs.service.VehicleAlertServiceImpl;
 import com.iot.cs.service.VehicleDetailService;
@@ -39,12 +40,17 @@ public class VehicleReadingController {
     private VehicleReadingService vehicleReadingService;
     private VehicleDetailService vehicleDetailService;
     private VehicleAlertService vehicleAlertService;
+    private TiresService tiresService;
     
     @Autowired
-    public VehicleReadingController(VehicleReadingServiceImpl vehicleReadingService, VehicleDetailServiceImpl vehicleDetailService, VehicleAlertServiceImpl vehicleAlertService) {
+    public VehicleReadingController(VehicleReadingServiceImpl vehicleReadingService, 
+            VehicleDetailServiceImpl vehicleDetailService, 
+            VehicleAlertServiceImpl vehicleAlertService,
+            TiresService tiresService) {
         this.vehicleReadingService = vehicleReadingService;
         this.vehicleDetailService = vehicleDetailService;
         this.vehicleAlertService = vehicleAlertService;
+        this.tiresService = tiresService;
     }
 
     // This method is used to save the VehicleReading in the Databsse
@@ -55,6 +61,8 @@ public class VehicleReadingController {
             log.debug("Processing the " + vehicleReading.toString() + " to check if any alert needs to be generated ");
             checkIfAnyAlertNeedsToBeGenerated(vehicleReading);
             log.debug("Saving the " + vehicleReading.toString() + " to the database");
+            vehicleReading.getTires().setVehicleReading(vehicleReading);
+            tiresService.save(vehicleReading.getTires());
             vehicleReadingService.save(vehicleReading);            
         } catch (Exception ex) {
             log.error("Exception while processing the create Vehicle Reading request " + ex);

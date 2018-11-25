@@ -50,8 +50,13 @@ public class VehicleReading implements Serializable {
 
     @Column(name = "engine_rpm")
     private Integer engineRpm;
+    
+    
+    @OneToOne (cascade=CascadeType.ALL)
+    @JoinColumn(name="tires_id")
+    private Tires tires;
 
-    public VehicleReading(Integer id, String vin, Double latitude, Double longitude, Timestamp currentTimestampTs, Float fuelVolume, Integer speed, Integer engineHp, Boolean checkEngineLightOn, Boolean engineCoolantLow, Boolean cruiseControlOn, Integer engineRpm) {
+    public VehicleReading(Integer id, String vin, Double latitude, Double longitude, Timestamp currentTimestampTs, Float fuelVolume, Integer speed, Integer engineHp, Boolean checkEngineLightOn, Boolean engineCoolantLow, Boolean cruiseControlOn, Integer engineRpm, Tires tires) {
         this.id = id;
         this.vin = vin;
         this.latitude = latitude;
@@ -64,6 +69,7 @@ public class VehicleReading implements Serializable {
         this.engineCoolantLow = engineCoolantLow;
         this.cruiseControlOn = cruiseControlOn;
         this.engineRpm = engineRpm;
+        this.tires = tires;
     }
 
     public VehicleReading() {
@@ -165,9 +171,28 @@ public class VehicleReading implements Serializable {
         this.engineRpm = engineRpm;
     }
 
-    @Override
-    public String toString() {
-        return "VehicleReading{" + "id=" + id + ", vin=" + vin + ", latitude=" + latitude + ", longitude=" + longitude + ", currentTimestampTs=" + currentTimestampTs + ", fuelVolume=" + fuelVolume + ", speed=" + speed + ", engineHp=" + engineHp + ", checkEngineLightOn=" + checkEngineLightOn + ", engineCoolantLow=" + engineCoolantLow + ", cruiseControlOn=" + cruiseControlOn + ", engineRpm=" + engineRpm + '}';
+    public Timestamp getCurrentTimestampTs() {
+        return currentTimestampTs;
     }
 
+    public void setCurrentTimestampTs(Timestamp currentTimestampTs) {
+        this.currentTimestampTs = currentTimestampTs;
+    }
+
+    public Tires getTires() {
+        return tires;
+    }
+
+    public void setTires(Tires tires) {
+        this.tires = tires;
+    }
+
+    @Override
+    public String toString() {
+        return "VehicleReading{" + "id=" + id + ", vin=" + vin + ", latitude=" + latitude + ", longitude=" + longitude + ", currentTimestampTs=" + currentTimestampTs + ", fuelVolume=" + fuelVolume + ", speed=" + speed + ", engineHp=" + engineHp + ", checkEngineLightOn=" + checkEngineLightOn + ", engineCoolantLow=" + engineCoolantLow + ", cruiseControlOn=" + cruiseControlOn + ", engineRpm=" + engineRpm + ", tires=" + tires + '}';
+    }
+    
+    
+
+   
 }

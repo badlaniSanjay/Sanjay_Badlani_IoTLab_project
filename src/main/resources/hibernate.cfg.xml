@@ -19,6 +19,6 @@
         <mapping class="com.iot.cs.model.VehicleDetail" />
         <mapping class="com.iot.cs.model.VehicleAlert" />
         <mapping class="com.iot.cs.model.VehicleReading" />
-      
+        <mapping class="com.iot.cs.model.Tires" />
     </session-factory>
 </hibernate-configuration>
