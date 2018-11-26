@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `CAR_SENSOR` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */;
+USE `CAR_SENSOR`;
 -- MySQL dump 10.13  Distrib 8.0.13, for macos10.14 (x86_64)
 --
 -- Host: localhost    Database: CAR_SENSOR
@@ -29,7 +31,7 @@ CREATE TABLE `tires` (
   `rear_left` int(11) DEFAULT NULL,
   `rear_right` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,9 +47,8 @@ CREATE TABLE `vehicle_alert` (
   `alert_message` longtext NOT NULL,
   `alert_priority` varchar(45) NOT NULL,
   `current_timestamp_ts` timestamp NOT NULL,
-  `vehicle_detail_id` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -93,7 +94,7 @@ CREATE TABLE `vehicle_reading` (
   PRIMARY KEY (`Id`),
   KEY `fk_tire_idx` (`tires_id`),
   CONSTRAINT `fk_tire` FOREIGN KEY (`tires_id`) REFERENCES `tires` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -105,4 +106,4 @@ CREATE TABLE `vehicle_reading` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-25  2:17:53
+-- Dump completed on 2018-11-26  1:14:07
